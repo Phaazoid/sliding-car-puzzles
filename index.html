@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sliding Car Puzzles</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app">
+  <aside class="panel">
+    <header>
+      <div class="logo"><i></i></div>
+      <div><h1>Sliding Car Puzzles</h1><p>Generated at any difficulty</p></div>
+    </header>
+
+    <section>
+      <h2>Board</h2>
+      <label class="row">Width <input id="width" type="range" min="4" max="8" value="6"><output id="widthOut">6</output></label>
+      <label class="row">Height <input id="height" type="range" min="4" max="8" value="6"><output id="heightOut">6</output></label>
+      <div class="row">Exit side
+        <div class="seg" id="side" role="radiogroup" aria-label="Exit side">
+          <button type="button" data-side="right" class="on" aria-pressed="true">Right</button>
+          <button type="button" data-side="left" aria-pressed="false">Left</button>
+          <button type="button" data-side="top" aria-pressed="false">Top</button>
+          <button type="button" data-side="bottom" aria-pressed="false">Bottom</button>
+        </div>
+      </div>
+      <label class="row"><span id="exitLabel">Exit row</span> <input id="exit" type="range" min="1" max="6" value="3"><output id="exitOut">3</output></label>
+    </section>
+
+    <section>
+      <h2>Vehicles</h2>
+      <label class="row">Cars (2 long) <input id="cars" type="range" min="0" max="14" value="8"><output id="carsOut">8</output></label>
+      <label class="row">Trucks (3 long) <input id="trucks" type="range" min="0" max="6" value="3"><output id="trucksOut">3</output></label>
+      <div class="note">Plus the red car, always.</div>
+    </section>
+
+    <section>
+      <h2>Difficulty</h2>
+      <label class="row">Moves to solve <input id="target" type="range" min="2" max="40" value="26"><output id="targetOut">26</output></label>
+      <div class="scale"><span>Beginner</span><span>Expert</span></div>
+      <label class="row">Trickiness <input id="trick" type="range" min="0" max="100" value="85"><output id="trickOut">High</output></label>
+      <div class="scale"><span>Path is obvious</span><span>Path is hidden</span></div>
+    </section>
+
+    <button id="generate" class="primary" type="button">Generate puzzle</button>
+    <div class="prog">
+      <div class="bar"><i id="bar"></i></div>
+      <span id="progText">Showing the starter puzzle</span>
+    </div>
+
+    <section>
+      <h2>This puzzle</h2>
+      <div class="stats">
+        <div class="stat"><small>Par (fewest moves)</small><span id="statPar">-</span></div>
+        <div class="stat"><small>Positions in its graph</small><span id="statStates">-</span></div>
+        <div class="stat"><small>Random solver needs</small><span id="statRandom">-</span></div>
+        <div class="stat"><small>Trickier than</small><span id="statTrick">-</span></div>
+      </div>
+      <p class="note" id="statNote"></p>
+    </section>
+
+    <section>
+      <h2>Saved puzzles</h2>
+      <div class="save-row">
+        <button type="button" id="save" class="secondary">Save puzzle</button>
+        <button type="button" id="share" class="secondary">Copy link</button>
+      </div>
+      <input id="linkBox" class="link-box" readonly hidden aria-label="Link to this puzzle">
+      <p class="note" id="saveNote">Saves this puzzle's start. To keep a position you played to, press Set as start first.</p>
+      <ul id="savedList" class="saved"></ul>
+    </section>
+  </aside>
+
+  <main>
+    <div class="toolbar">
+      <div class="count"><b id="moves">0</b> <span id="movesWord">moves</span> <em id="par">Par -</em></div>
+      <div class="tools">
+        <button type="button" id="undo">&#x21B6; Undo</button>
+        <button type="button" id="reset">&#x21BB; Reset</button>
+        <button type="button" id="setStart" title="Make the position on the board this puzzle's start">&#x1F4CC; Set as start</button>
+        <button type="button" id="hint">&#x1F4A1; Hint</button>
+        <button type="button" id="solve">&#x25B6; Show solution</button>
+        <button type="button" id="letters" aria-pressed="false" title="Show a letter on every vehicle">Aa Letters</button>
+      </div>
+    </div>
+    <div class="stage">
+      <div id="board" class="board"></div>
+      <div id="banner" class="banner" hidden></div>
+    </div>
+    <div class="foot">Drag a car along its lane. Get the red car out through the exit.</div>
+  </main>
+</div>
+<script src="js/engine.js"></script>
+<script src="js/puzzles.js"></script>
+<script src="js/generator.js"></script>
+<script src="js/render.js"></script>
+<script src="js/game.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
